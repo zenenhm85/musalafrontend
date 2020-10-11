@@ -1,0 +1,66 @@
+<div [id]="idModal" class="modal fade modal-right" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">User information</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p *ngIf="user.imageUrl">
+          <img
+            [src]="user.imageUrl"
+            alt="Avatar of User"
+            class="img-responsive mx-auto zd-block profile-card img-circle"
+          />
+        </p>
+        <p><b>Name: </b> {{ user.name }}</p>
+        <b>Email: </b>{{ user.email }}
+        <br />
+        <br />
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Active:</label>
+                <select
+                  class="form-control custom-select"
+                  [(ngModel)]="user.active"
+                  (change)="changeActive(user)"
+                  tabindex="1"
+                >
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>                 
+                </select>
+              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">User Role:</label>
+              <select
+                class="form-control custom-select"
+                [(ngModel)]="user.role"
+                (change)="changeRole(user)"
+                tabindex="1"
+              >
+                <option value="ADMIN_ROLE">Admin</option>
+                <option value="ADVUSER_ROLE">Super User</option>
+                <option value="USER_ROLE">User</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

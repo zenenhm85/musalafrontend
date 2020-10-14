@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { SignUpForm } from '../interfaces/signup.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { UpdateProfileForm } from '../interfaces/update-profile.interface';
+
 import { User } from '../models/user.model';
 
 const url = environment.url;
@@ -43,7 +44,7 @@ export class UserService {
   }
   login(formData: LoginForm) {
     return this.http.post(`${url}/login`, formData).pipe(
-      tap((resp: any) => {
+      tap((resp: any) => {       
         localStorage.setItem('token', resp.token);
       })
     );
@@ -94,8 +95,7 @@ export class UserService {
 
       if (data.ok) {
         return data.fileName;
-      } else {
-        console.log(data.message);
+      } else {       
         return false;
       }
     } catch (error) {

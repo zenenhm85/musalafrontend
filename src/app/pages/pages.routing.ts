@@ -8,6 +8,7 @@ import { PagesComponent } from '../pages/pages.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
+import { PeripheralDevicesComponent } from './peripheral-devices/peripheral-devices.component'
 
 
 const routes: Routes = [
@@ -27,7 +28,17 @@ const routes: Routes = [
         component: ProfileComponent,
         data: { title: 'User Profile' },
       },
-      { path: 'users', component: UsersComponent, canActivate:[AdminGuard], data: { title: 'Users' } },     
+      {
+        path: 'users',
+        component: UsersComponent,
+        canActivate: [AdminGuard],
+        data: { title: 'Users' },
+      },
+      {
+        path: 'devices/:gateway',
+        component: PeripheralDevicesComponent,
+        data: { title: 'Peripheral Devices' },
+      }
     ],
   },
 ];

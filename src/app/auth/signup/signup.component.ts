@@ -44,7 +44,7 @@ export class SignupComponent {
         this.router.navigateByUrl('dashboard');
       },
       (err) => {
-        console.log(err);
+        
         Swal.fire('Error', err.error.message, 'error');
       }
     );

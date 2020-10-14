@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {AppRoutingModule} from '../app-routing.module';
 import {SharedModule} from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { ComponentsModule } from '../components/components.module'
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -10,6 +11,8 @@ import {PagesComponent} from './pages.component';
 import { UsersComponent } from './users/users.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
+import { PeripheralDevicesComponent } from './peripheral-devices/peripheral-devices.component';
+
 
 
 
@@ -19,11 +22,12 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
     DashboardComponent,
     UsersComponent,   
     ProfileComponent,
-    AccountSettingComponent,    
+    AccountSettingComponent,
+    PeripheralDevicesComponent      
   ],
   exports:[
     PagesComponent,
-    DashboardComponent,   
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +35,8 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
     SharedModule,
     FormsModule, 
     ReactiveFormsModule, 
-    ComponentsModule
+    ComponentsModule,
+    MatPaginatorModule
      
   ]
 })

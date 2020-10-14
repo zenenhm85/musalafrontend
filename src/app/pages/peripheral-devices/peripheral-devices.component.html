@@ -1,0 +1,91 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive m-t-40">
+          <button
+            data-toggle="modal"
+            data-target="#ModalAddDevice"
+            class="btn btn-info"
+            style="margin-left: 3px"
+            *ngIf="user.role === 'ADMIN_ROLE'"
+          >
+            <i class="fa fa-plus-square m-r-10"></i>
+          </button>
+          <div id="myTable_wrapper" class="dataTables_wrapper no-footer">
+            <table
+              id="myTable"
+              class="table table-bordered table-striped dataTable no-footer"
+              role="grid"
+              aria-describedby="myTable_info"
+            >
+              <thead>
+                <tr role="row">
+                  <th class="text-center w10">
+                    <span class="font-weight-bold">UID</span>
+                  </th>
+                  <th class="text-center w30">
+                    <span class="font-weight-bold">Vendor</span>
+                  </th>
+                  <th class="text-center w10">
+                    <span class="font-weight-bold">Status</span>
+                  </th>
+                  <th class="text-center w30">
+                    <span class="font-weight-bold">Date</span>
+                  </th>
+                  <th class="text-center w20">
+                    <span class="font-weight-bold">Actions</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr role="row" class="odd" *ngFor="let device of devices">
+                  <td class="text-center w10">
+                    {{ device.uid }}
+                  </td>
+                  <td class="text-center w30">{{ device.vendor }}</td>
+                  <td class="text-center w10" *ngIf="device.status === false">
+                    <span class="label label-danger label-rounded"
+                      >Offline</span
+                    >
+                  </td>
+                  <td class="text-center w10" *ngIf="device.status === true">
+                    <span class="label label-success label-rounded"
+                      >Online</span
+                    >
+                  </td>
+                  <td class="text-center w30">{{ device.date }}</td>
+                  <td class="text-nowrap text-center w20">                   
+                    <a
+                      *ngIf="user.role === 'ADMIN_ROLE'"
+                      class="cursorpointer"
+                      data-toggle="modal"
+                      data-original-title="Delete"
+                      data-target="#deleteDevice"
+                      (click)="getDevice(device)"
+                    >
+                      <i class="fa fa-close text-danger m-r-10"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-add-device
+  [idModal]="'ModalAddDevice'"
+  [gateway]="gateway"
+  (answer)="addDevice($event)"
+></app-add-device>
+<app-delte-device
+  [idModal]="'deleteDevice'"
+  [idDevice]="device.id"
+  (answer)="deleDevice($event)"
+></app-delte-device>
+
+  

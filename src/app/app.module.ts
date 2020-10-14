@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {PagesModule} from './pages/pages.module';
 import {AuthModule} from './auth/auth.module';
-import {MatPaginatorModule} from '@angular/material/paginator';
+
+
 
 
 import { AppComponent } from './app.component';
@@ -23,8 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     PagesModule,
     AuthModule,
-    BrowserAnimationsModule,
-    MatPaginatorModule
+    BrowserAnimationsModule,    
   ],
   providers: [],
   bootstrap: [AppComponent]

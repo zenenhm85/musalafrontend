@@ -45,7 +45,7 @@ export class LoginComponent  {
         }
       },
       (err) => {
-        Swal.fire('Error', 'Internal Server Error. Possible Server off', 'error');
+        Swal.fire('Error', 'Internal Server Error. Possible Server off or user not active', 'error');
       }
     );
   }

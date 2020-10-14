@@ -1,5 +1,122 @@
-<div class="row">
-    <div class="col-md-4">
-       <p>Probando</p>
-    </div>    
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive m-t-40">
+          <div id="myTable_wrapper" class="dataTables_wrapper no-footer">
+            <button
+              data-toggle="modal"
+              data-target="#ModalAdd"
+              class="btn btn-info"
+              style="margin-left: 3px"
+              *ngIf="user.role === 'ADMIN_ROLE'"
+            >
+              <i class="fa fa-plus-square m-r-10"></i>
+            </button>
+            <div id="myTable_filter" class="dataTables_filter">
+              <label
+                >Search:
+                <input
+                  type="search"
+                  class=""
+                  placeholder=""
+                  aria-controls="myTable"
+                  (keyup)="searchGateways(inputSearch.value)"
+                  #inputSearch
+                />
+              </label>
+            </div>
+
+            <table
+              id="myTable"
+              class="table table-bordered table-striped dataTable no-footer"
+              role="grid"
+              aria-describedby="myTable_info"
+            >
+              <thead>
+                <tr role="row">
+                  <th class="text-center w30">
+                    <span class="font-weight-bold">Name</span>
+                  </th>
+                  <th class="text-center w30">
+                    <span class="font-weight-bold">Serial</span>
+                  </th>
+                  <th class="text-center w20">
+                    <span class="font-weight-bold">IPV4</span>
+                  </th>
+                  <th class="text-center w20">
+                    <span class="font-weight-bold">Actions</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr role="row" class="odd" *ngFor="let gateway of gateways">
+                  <td class="text-center w5">
+                    {{ gateway.name }}
+                  </td>
+                  <td class="text-center w40">{{ gateway.serial }}</td>
+                  <td class="text-center w40">{{ gateway.ipv4 }}</td>
+                  <td class="text-nowrap text-center w15">
+                    <a
+                      class="cursorpointer"
+                      data-toggle="modal"
+                      data-target="#myModalRight"
+                      data-original-title="View"
+                      [routerLink]="[ '/dashboard/devices', gateway.id]"
+                    >
+                      <i class="fa fa-eye text-info m-r-10"></i>
+                    </a>
+                    <a
+                      *ngIf="user.role === 'ADMIN_ROLE'"
+                      class="cursorpointer"
+                      data-toggle="modal"
+                      data-target="#updateGateway"
+                      data-original-title="Edit"
+                      (click)="getGateway(gateway)"
+                    >
+                      <i class="fa fa-pencil m-r-10"></i>
+                    </a>
+                    <a
+                      *ngIf="user.role === 'ADMIN_ROLE'"
+                      class="cursorpointer"
+                      data-toggle="modal"
+                      data-original-title="Delete"
+                      data-target="#deleteGateway"
+                      (click)="getGateway(gateway)"
+                    >
+                      <i class="fa fa-close text-danger m-r-10"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <mat-paginator
+              *ngIf="!searching"
+              [length]="total"
+              [(pageSize)]="dataTable.size"
+              [(pageIndex)]="dataTable.page"
+              [pageSizeOptions]="[5, 10, 20, 30, 50]"
+              (page)="pageEvent($event)"
+            >
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<app-add-gateway
+  [idModal]="'ModalAdd'"
+  (answer)="addGateway($event)"
+></app-add-gateway>
+<app-delete-gateway
+  [idModal]="'deleteGateway'"
+  [idGateway]="gateway.id"
+  (answer)="deleGateway($event)"
+></app-delete-gateway>
+<app-edit-gateway
+  [idModal]="'updateGateway'"
+  [gateway]="gateway"  
+  (answer)="updateGateway($event)">
+</app-edit-gateway>

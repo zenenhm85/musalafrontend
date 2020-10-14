@@ -1,0 +1,60 @@
+<div
+  [id]="idModal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+  style="display: none"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Adding Gateway</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+        >
+          ×
+        </button>
+      </div>
+      <div class="modal-body">
+        <form autocomplete="off" [formGroup]="registerForm">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Name:</label>
+            <input type="text" class="form-control" formControlName="name" />
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Serial:</label>
+            <input type="text" class="form-control" formControlName="serial" />
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">IPV4:</label>
+            <input type="text" class="form-control" formControlName="ipv4" />
+          </div>
+        </form>
+        <div >
+          <p *ngIf="invalidFields('name')">
+            * Name must be longer than 1 character
+          </p>
+          <p *ngIf="invalidFields('ipv4')">* IPV4 is required and valid</p>
+          <p *ngIf="invalidFields('serial')">
+            * Serial must be longer than 5 characters
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          [disabled]="registerForm.invalid"
+          class="btn btn-success waves-effect waves-light"
+          (click)="saveGateway()"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

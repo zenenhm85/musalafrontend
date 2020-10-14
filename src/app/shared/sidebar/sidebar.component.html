@@ -38,7 +38,7 @@
           </ul>
         </li>
         <li class="nav-devider"></li>
-        <li class="nav-small-cap">PRINCIPAL MENU</li>
+        <li class="nav-small-cap" *ngIf="user.role === 'ADMIN_ROLE'">PRINCIPAL MENU</li>
         <li *ngIf="user.role === 'ADMIN_ROLE'" >
           <a
             class="has-arrow waves-effect waves-dark"
